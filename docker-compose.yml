@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  my_app:
+    build:
+      context: .
+    volumes:
+      - .:/app
+    ports:
+      - "5000:5000"
+    command: pip list 
+    # command: python3.11 app.py
