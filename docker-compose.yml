@@ -8,5 +8,5 @@ services:
       - .:/app
     ports:
       - "5000:5000"
-    command: pip list 
-    # command: python3.11 app.py
+    # command: pip list | grep Flask
+    command: python3.11 app.py
