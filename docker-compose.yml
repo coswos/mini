@@ -8,5 +8,4 @@ services:
       - .:/app
     ports:
       - "5000:5000"
-    # command: pip list | grep Flask
-    command: python3.11 app.py
+    command: sh -c "pip install pipenv && pipenv install && pipenv run python3 app.py"
