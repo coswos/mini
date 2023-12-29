@@ -1,0 +1,55 @@
+class Player:
+    health = 100
+    _damage_received = 0
+
+    def __init__(self, name, armor: int, damage=10):
+        self.name = name
+        self.my_damage = damage
+        self.armor = armor
+        self._start_health = self.health
+
+    def hit(self, income_damage):
+        self._start_health = self.health
+
+        if income_damage > self.armor:
+            self._damage_received = income_damage - self.armor
+
+        if self.health - self._damage_received < 0:
+            self.health = max(self.health - self._damage_received, 0)
+        else:
+            self.health -= self._damage_received
+
+    def __str__(self):
+        if self.health == 0:
+            return (
+                f"{self.name} received {self._damage_received} points of damage "
+                f"with {self._start_health} health\nHealth now: {self.health}\n"
+                f"{'-'*10} {self.name} is dead {'-'*10}"
+            )
+        else:
+            return (
+                f"{self.name} received {self._damage_received} points of damage "
+                f"with {self._start_health} health\nHealth now: {self.health}\n"
+            )
+
+
+unit1 = Player(name="Elf", armor=3)
+unit2 = Player(name="Orc", armor=3)
+
+
+def dispatcher(who: Player, to_whom: Player):
+    if to_whom.health == 0 or who.health == 0:
+        return
+    else:
+        to_whom.hit(who.my_damage)
+        print(to_whom)
+
+    if to_whom.health == 0:
+        print(who.name, "WON!!!")
+    elif who.health == 0:
+        print(to_whom.name, "WON!!!")
+
+
+for i in range(15):
+    dispatcher(unit1, unit2)
+    dispatcher(unit2, unit1)
