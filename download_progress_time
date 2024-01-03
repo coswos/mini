@@ -1,0 +1,22 @@
+mb = 1 * 1000  # convert GB to mb
+speed = 1  # mb per second
+how_many_second = mb / speed  # how many seconds it will take
+download = how_many_second / 60  # how fast the download will be in minutes
+unit_of_meas = "minute" if download < 2 else "minutes"  # units of measurement
+amount_after = None
+
+# convert to hours
+if download > 60:
+    download = download / 60
+    unit_of_meas = "hour" if int(download) < 2 else "hours"
+    amount_after = (
+        download - int(download)
+    ) * 60  # convert the remainder after the delimiter
+
+# representation
+if amount_after:
+    print(
+        f"The download will complete in {int(download)} {unit_of_meas} {round(amount_after)} minutes."
+    )
+else:
+    print(f"The download will complete in {int(download)} {unit_of_meas}.")
